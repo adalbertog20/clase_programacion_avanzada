@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIIDSTM</title>
+</head>
+
+<body>
+    <canvas id="canv" width="800" height="400" style="border: 1px solid #000000;"></canvas>
+</body>
+<script>
+    const canvas = document.getElementById("canv");
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = "rgba(0, 0, 255, 0.3)";
+    ctx.fillRect(30, 30, 90, 90);
+    ctx.fillStyle = "rgba(255, 0, 0, 0.9)";
+    ctx.fillRect(90, 90, 90, 90);
+    ctx.fillStyle = "rgba(255,192,203, 0.8)";
+    ctx.fillRect(150, 150, 90, 90);
+</script>;
+
+</html>
