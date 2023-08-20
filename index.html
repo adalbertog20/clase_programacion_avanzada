@@ -13,34 +13,15 @@
 <script>
     const canvas = document.getElementById("canv");
     const ctx = canvas.getContext("2d");
-    ctx.fillStyle = "rgba(0, 0, 255, 0.3)";
-    ctx.fillRect(30, 30, 90, 90);
-    ctx.fillStyle = "rgba(255, 0, 0, 0.9)";
-    ctx.fillRect(90, 90, 90, 90);
-    ctx.fillStyle = "rgba(255,192,203, 0.8)";
-    ctx.fillRect(150, 150, 90, 90);
 
-    ctx.beginPath();
-    ctx.moveTo(485, 10);
-    ctx.lineTo(485, 65);
-    ctx.lineTo(425, 65);
-    ctx.fillStyle = "#000000";
-    ctx.stroke();
-    ctx.fill();
-    ctx.beginPath();
-    ctx.moveTo(322, 65);
-    ctx.lineTo(372, 125);
-    ctx.stroke();
+    const grd = ctx.createLinearGradient(0, 0, 170, 0);
+    grd.addColorStop(0, "green");
+    grd.addColorStop(0.5, "white");
+    grd.addColorStop(1, "red");
 
-    ctx.beginPath();
-    ctx.arc(435, 410, 60, 0, 2 * Math.PI);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(635, 410, 50, 0, 2 * Math.PI);
-    ctx.stroke();
-
-    ctx.font = "40px Arial";
-    ctx.strokeText("Hello World!", 200, 300);
+    // Draw a filled Rectangle
+    ctx.fillStyle = grd;
+    ctx.fillRect(20, 20, 150, 100);
 </script>;
 
 </html>
