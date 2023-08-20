@@ -19,7 +19,7 @@
     ctx.fillRect(90, 90, 90, 90);
     ctx.fillStyle = "rgba(255,192,203, 0.8)";
     ctx.fillRect(150, 150, 90, 90);
-    
+
     ctx.beginPath();
     ctx.moveTo(485, 10);
     ctx.lineTo(485, 65);
@@ -38,6 +38,9 @@
     ctx.beginPath();
     ctx.arc(635, 410, 50, 0, 2 * Math.PI);
     ctx.stroke();
+
+    ctx.font = "40px Arial";
+    ctx.strokeText("Hello World!", 200, 300);
 </script>;
 
 </html>
