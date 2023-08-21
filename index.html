@@ -14,15 +14,31 @@
 <script>
     const canvas = document.getElementById("canv");
     const ctx = canvas.getContext("2d");
+    var figure = true;
     canvas.addEventListener("click", (event) => {
-        ctx.beginPath();
-        ctx.fillStyle = random_rgba();
-        ctx.arc(event.layerX, event.layerY, 20, 0, 2 * Math.PI);
-        ctx.stroke();
-        ctx.fill();
+        if(figure) {
+            ctx.beginPath();
+            ctx.fillStyle = random_rgba();
+            ctx.arc(event.layerX, event.layerY, 20, 0, 2 * Math.PI);
+            ctx.stroke();
+            ctx.fill();
+        } else {
+            ctx.beginPath();
+            ctx.rect(event.layerX, event.layerY, 50, 50);
+            ctx.stroke();
+            ctx.fillStyle = random_rgba();
+            ctx.fill();
+        }
     });
     canvas.addEventListener("mouseover", (event) => {
         ctx.fillStyle = random_rgba();
+    });
+    canvas.addEventListener("mouseout", (event) => {
+        if(figure) {
+            figure = false; 
+        } else {
+            figure = true;
+        }
     });
     function random_rgba() {
         var o = Math.round, r = Math.random, s = 255;
