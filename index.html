@@ -15,8 +15,9 @@
     const canvas = document.getElementById("canv");
     const ctx = canvas.getContext("2d");
     var figure = true;
+    var pressed = false;
     canvas.addEventListener("click", (event) => {
-        if(figure) {
+        if (figure) {
             ctx.beginPath();
             ctx.fillStyle = random_rgba();
             ctx.arc(event.layerX, event.layerY, 20, 0, 2 * Math.PI);
@@ -34,19 +35,26 @@
         ctx.fillStyle = random_rgba();
     });
     canvas.addEventListener("mouseout", (event) => {
-        if(figure) {
-            figure = false; 
+        if (figure) {
+            figure = false;
         } else {
             figure = true;
         }
     });
     canvas.addEventListener("mousemove", (event) => {
-        console.log("mousemove");
-        ctx.beginPath();
-        ctx.arc(event.layerX, event.layerY, 10, 0, 2 * Math.PI);
-        ctx.stroke();
-        ctx.fillStyle = random_rgba();
-        ctx.fill();
+        if (pressed) {
+            ctx.beginPath();
+            ctx.arc(event.layerX, event.layerY, 10, 0, 2 * Math.PI);
+            ctx.stroke();
+            ctx.fillStyle = random_rgba();
+            ctx.fill();
+        }
+    });
+    canvas.addEventListener("mousedown", (event) => {
+        pressed = true;
+    });
+    canvas.addEventListener("mouseup", (event) => {
+        pressed = false;
     });
     function random_rgba() {
         var o = Math.round, r = Math.random, s = 255;
