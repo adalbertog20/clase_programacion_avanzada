@@ -14,14 +14,12 @@
     const canvas = document.getElementById("canv");
     const ctx = canvas.getContext("2d");
 
-    const grd = ctx.createLinearGradient(0, 0, 170, 0);
-    grd.addColorStop(0, "green");
-    grd.addColorStop(0.5, "white");
-    grd.addColorStop(1, "red");
-
-    // Draw a filled Rectangle
+    const grd = ctx.createRadialGradient(150, 20, 1, 90, 70, 90);
+    grd.addColorStop(0, "orange");
+    grd.addColorStop(0.5, "yellow");
+    grd.addColorStop(1, "cyan");
     ctx.fillStyle = grd;
-    ctx.fillRect(20, 20, 150, 100);
+    ctx.fillRect(10, 10, 150, 100);
 </script>;
 
 </html>
