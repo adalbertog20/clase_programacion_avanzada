@@ -40,6 +40,14 @@
             figure = true;
         }
     });
+    canvas.addEventListener("mousemove", (event) => {
+        console.log("mousemove");
+        ctx.beginPath();
+        ctx.arc(event.layerX, event.layerY, 10, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.fillStyle = random_rgba();
+        ctx.fill();
+    });
     function random_rgba() {
         var o = Math.round, r = Math.random, s = 255;
         return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
