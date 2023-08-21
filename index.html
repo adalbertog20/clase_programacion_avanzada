@@ -10,20 +10,24 @@
 <body>
     <canvas id="canv" width="800" height="600" style="border: 1px solid #000000;">
     </canvas>
-    <img src="cuadro.png" alt="" id="img" width="220" height="277">
 </body>
 <script>
     const canvas = document.getElementById("canv");
     const ctx = canvas.getContext("2d");
     canvas.addEventListener("click", (event) => {
-        console.log(event);
         ctx.beginPath();
-        ctx.fillStyle = "rgba(255,192,203, 0.8)";
-        ctx.arc(event.layerX, event.layerY, 50, 0, 2 * Math.PI);
+        ctx.fillStyle = random_rgba();
+        ctx.arc(event.layerX, event.layerY, 20, 0, 2 * Math.PI);
         ctx.stroke();
         ctx.fill();
     });
-
+    canvas.addEventListener("mouseover", (event) => {
+        ctx.fillStyle = random_rgba();
+    });
+    function random_rgba() {
+        var o = Math.round, r = Math.random, s = 255;
+        return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+    }
 </script>
 
 </html>
