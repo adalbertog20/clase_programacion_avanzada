@@ -15,8 +15,14 @@
 <script>
     const canvas = document.getElementById("canv");
     const ctx = canvas.getContext("2d");
-    const img = document.getElementById("img");
-    ctx.drawImage(img, 10, 10);
+    canvas.addEventListener("click", (event) => {
+        console.log(event);
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(255,192,203, 0.8)";
+        ctx.arc(event.layerX, event.layerY, 50, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.fill();
+    });
 
 </script>
 
