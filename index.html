@@ -10,14 +10,24 @@
 <body>
     <canvas id="canv" width="800" height="600" style="border: 1px solid #000000;">
     </canvas>
-    <img src="cuadro.png" alt="" id="img" width="220" height="277">
 </body>
 <script>
     const canvas = document.getElementById("canv");
     const ctx = canvas.getContext("2d");
-    const img = document.getElementById("img");
-    ctx.drawImage(img, 10, 10);
-
+    document.addEventListener(("keydown"), (e) => {
+        ctx.beginPath();
+        ctx.rect(getRandomInt(750), getRandomInt(450), 50, 50);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = random_rgba();
+    });
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+    function random_rgba() {
+        var o = Math.round, r = Math.random, s = 255;
+        return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+    }
 </script>
 
 </html>
