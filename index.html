@@ -15,10 +15,8 @@
     const canvas = document.getElementById("canv");
     const ctx = canvas.getContext("2d");
     document.addEventListener(("keydown"), (e) => {
-        ctx.beginPath();
         ctx.rect(getRandomInt(750), getRandomInt(450), 50, 50);
         ctx.fill();
-        ctx.stroke();
         ctx.fillStyle = random_rgba();
     });
     function getRandomInt(max) {
