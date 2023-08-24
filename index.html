@@ -8,15 +8,33 @@
 </head>
 
 <body>
-    <canvas id="canv" width="800" height="600" style="border: 1px solid #000000;">
+    <canvas id="canv" width="500" height="500" style="border: 1px solid #000000;">
     </canvas>
 </body>
 <script>
     const canvas = document.getElementById("canv");
     const ctx = canvas.getContext("2d");
+    var x = 225;
+    var y = 225;
     document.addEventListener(("keydown"), (e) => {
-        ctx.rect(getRandomInt(750), getRandomInt(450), 50, 50);
+        console.log(e);
+        switch (e.keyCode) {
+            case 65:
+                x -= 10;
+                break;
+            case 87:
+                y -= 10;
+                break;
+            case 83:
+                y += 10
+                break;
+            case 68:
+                x += 10;
+                break;
+        }
+        ctx.rect(x, y, 50, 50);
         ctx.fill();
+        ctx.stroke();
         ctx.fillStyle = random_rgba();
     });
     function getRandomInt(max) {
