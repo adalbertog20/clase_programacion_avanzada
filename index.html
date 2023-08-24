@@ -32,10 +32,14 @@
                 x += 10;
                 break;
         }
+        ctx.beginPath();
+        ctx.fillStyle = "white";
+        ctx.rect(0, 0, 500, 500);
+        ctx.fill();
         ctx.rect(x, y, 50, 50);
         ctx.fill();
-        ctx.stroke();
         ctx.fillStyle = random_rgba();
+        ctx.stroke();
     });
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
