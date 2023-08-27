@@ -14,40 +14,98 @@
 <script>
     const canvas = document.getElementById("canv");
     const ctx = canvas.getContext("2d");
-    var x = 225;
-    var y = 225;
-    document.addEventListener(("keydown"), (e) => {
-        console.log(e);
-        switch (e.keyCode) {
-            case 65:
-                x -= 10;
-                break;
-            case 87:
-                y -= 10;
-                break;
-            case 83:
-                y += 10
-                break;
-            case 68:
-                x += 10;
-                break;
-        }
-        ctx.beginPath();
-        ctx.fillStyle = "white";
-        ctx.rect(0, 0, 500, 500);
-        ctx.fill();
-        ctx.rect(x, y, 50, 50);
-        ctx.fill();
-        ctx.fillStyle = random_rgba();
-        ctx.stroke();
-    });
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * max);
+    ctx.beginPath();
+    ctx.fillStyle = "rgb(128, 80, 45)";
+    ctx.arc(225, 175, 100, 0, Math.PI * 2, true);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.fillStyle = "black";
+    ctx.arc(225, 120, 80, 0, Math.PI * 1, true);
+    ctx.fill();
+    img = new Image();
+    img.src = 'ct-logo.png';
+    img.onload = function (e) {
+        ctx.drawImage(img, 195, 60, 64, 64);
     }
-    function random_rgba() {
-        var o = Math.round, r = Math.random, s = 255;
-        return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+    ctx.beginPath();
+    ctx.fillStyle = "white";
+    ctx.arc(180, 155, 20, 0, Math.PI * 2, true);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.fillStyle = "white";
+    ctx.arc(270, 155, 20, 0, Math.PI * 2, true);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.fillStyle = "black";
+    ctx.arc(270, 155, 15, 0, Math.PI * 2, true);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.fillStyle = "black";
+    ctx.arc(180, 155, 15, 0, Math.PI * 2, true);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.fillStyle = "rgb(94, 72, 30)";
+    ctx.arc(180, 155, 13, 0, Math.PI * 2, true);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.fillStyle = "rgb(94, 72, 30)";
+    ctx.arc(270, 155, 13, 0, Math.PI * 2, true);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.fillStyle = "black";
+    ctx.arc(180, 155, 4, 0, Math.PI * 2, true);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.fillStyle = "black";
+    ctx.arc(270, 155, 4, 0, Math.PI * 2, true);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.fillStyle = "rgb(110, 70, 39)";
+    ctx.rect(204, 273, 40, 50,);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.fillStyle = "rgb(4, 77, 63)";
+    ctx.rect(164, 300, 120, 200);
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.fillStyle = "rgb(205, 227, 36)";
+    ctx.font = "20px Arial";
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 5;
+    ctx.fillStyle = 'rgba(205, 227, 36)';
+    ctx.strokeText("DUCKS", 190, 350);
+    ctx.fillText("DUCKS", 190, 350);
+
+
+    ctx.fillStyle = "rgb(205, 227, 36)";
+    ctx.font = "bold 100px Arial";
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 5;
+    ctx.fillStyle = 'rgba(205, 227, 36)';
+    ctx.strokeText("10", 167, 450);
+    ctx.fillText("10", 167, 450);
+
+    img_nike = new Image();
+    img_nike.src = 'nike-logo.png';
+    img_nike.onload = function (e) {
+        ctx.drawImage(img_nike, 240, 300, 32, 32);
     }
+    ctx.beginPath();
+    ctx.fillStyle = "black";
+    ctx.rect(124, 300, 40, 200);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.fillStyle = "black";
+    ctx.rect(284, 300, 40, 200);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(225, 200, 35, 0, Math.PI * 1, false);
+    ctx.fill();
 </script>
 
 </html>
