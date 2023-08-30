@@ -8,103 +8,39 @@
 </head>
 
 <body>
-    <canvas id="canv" width="500" height="500" style="border: 1px solid #000000;">
+    <canvas id="canv" width="1350" height="610" style="border: 1px solid #000000;">
     </canvas>
 </body>
 <script>
     const canvas = document.getElementById("canv");
     const ctx = canvas.getContext("2d");
-    ctx.beginPath();
-    ctx.fillStyle = "rgb(128, 80, 45)";
-    ctx.arc(225, 175, 100, 0, Math.PI * 2, true);
+    ctx.fillStyle = "#00fff0";
+    ctx.rect(0, 0, 1350, 610);
     ctx.fill();
     ctx.beginPath();
-    ctx.fillStyle = "black";
-    ctx.arc(225, 120, 80, 0, Math.PI * 1, true);
-    ctx.fill();
-    img = new Image();
-    img.src = 'ct-logo.png';
-    img.onload = function (e) {
-        ctx.drawImage(img, 195, 60, 64, 64);
-    }
-    ctx.beginPath();
-    ctx.fillStyle = "white";
-    ctx.arc(180, 155, 20, 0, Math.PI * 2, true);
+    ctx.fillStyle = "#C2B280";
+    ctx.rect(0, 460, 1350, 150);
     ctx.fill();
     ctx.beginPath();
-    ctx.fillStyle = "white";
-    ctx.arc(270, 155, 20, 0, Math.PI * 2, true);
-    ctx.fill();
+    ctx.moveTo(0, 200);
+    ctx.lineTo(1350, 200);
+    ctx.strokeStyle = "white";
+    ctx.stroke();
     ctx.beginPath();
-    ctx.fillStyle = "black";
-    ctx.arc(270, 155, 15, 0, Math.PI * 2, true);
+    const grd = ctx.createLinearGradient(20, 0, 20, 100);
+    grd.addColorStop(0, "aqua");
+    grd.addColorStop(1, "white");
+    ctx.fillStyle = grd;
     ctx.fill();
+    ctx.fillRect(0, 0, 1350, 200);
     ctx.beginPath();
-    ctx.fillStyle = "black";
-    ctx.arc(180, 155, 15, 0, Math.PI * 2, true);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.fillStyle = "rgb(94, 72, 30)";
-    ctx.arc(180, 155, 13, 0, Math.PI * 2, true);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.fillStyle = "rgb(94, 72, 30)";
-    ctx.arc(270, 155, 13, 0, Math.PI * 2, true);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.fillStyle = "black";
-    ctx.arc(180, 155, 4, 0, Math.PI * 2, true);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.fillStyle = "black";
-    ctx.arc(270, 155, 4, 0, Math.PI * 2, true);
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.fillStyle = "rgb(110, 70, 39)";
-    ctx.rect(204, 273, 40, 50,);
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.fillStyle = "rgb(4, 77, 63)";
-    ctx.rect(164, 300, 120, 200);
-    ctx.fill();
-    ctx.closePath();
-
-    ctx.fillStyle = "rgb(205, 227, 36)";
-    ctx.font = "20px Arial";
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 5;
-    ctx.fillStyle = 'rgba(205, 227, 36)';
-    ctx.strokeText("DUCKS", 190, 350);
-    ctx.fillText("DUCKS", 190, 350);
-
-
-    ctx.fillStyle = "rgb(205, 227, 36)";
-    ctx.font = "bold 100px Arial";
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 5;
-    ctx.fillStyle = 'rgba(205, 227, 36)';
-    ctx.strokeText("10", 167, 450);
-    ctx.fillText("10", 167, 450);
-
-    img_nike = new Image();
-    img_nike.src = 'nike-logo.png';
-    img_nike.onload = function (e) {
-        ctx.drawImage(img_nike, 240, 300, 32, 32);
-    }
-    ctx.beginPath();
-    ctx.fillStyle = "black";
-    ctx.rect(124, 300, 40, 200);
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.fillStyle = "black";
-    ctx.rect(284, 300, 40, 200);
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.arc(225, 200, 35, 0, Math.PI * 1, false);
+    ctx.fillStyle = "blue";
+    ctx.fillRect(0, 200, 1350, 260);
+    ctx.arc(575, 200, 120, 0, 1 * Math.PI, true);
+    const grd1 = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
+    grd1.addColorStop(0, "red");
+    grd1.addColorStop(1, "yellow");
+    ctx.fillStyle = grd1;
     ctx.fill();
 </script>
 
