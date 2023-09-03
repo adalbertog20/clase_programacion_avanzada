@@ -12,36 +12,78 @@
     </canvas>
 </body>
 <script>
-    const canvas = document.getElementById("canv");
-    const ctx = canvas.getContext("2d");
-    ctx.fillStyle = "#00fff0";
-    ctx.rect(0, 0, 1350, 610);
+    const canv = document.getElementById("canv");
+const ctx = canv.getContext("2d");
+ctx.fillStyle = "aqua";
+ctx.fillRect(0, 0, 1310, 610);
+
+ctx.fillStyle = "rgb(240, 182, 127)";
+ctx.fillRect(0, 450, 1310, 50);
+
+ctx.beginPath();
+ctx.fillStyle = "black";
+ctx.fillRect(190, 90, 220, 360);
+ctx.fillStyle = "rgb(71, 201, 245)";
+ctx.fillRect(200, 100, 200, 350);
+ctx.fillStyle = "rgb(32, 99, 122)";
+ctx.fillRect(390  , 100, 10, 350,);
+ctx.fillStyle = "black";
+ctx.fillRect(400, 150, 50, 300);
+
+ctx.beginPath();
+ctx.fillStyle = "black";
+ctx.fillRect(290, 190, 220, 260);
+ctx.fillStyle = "rgb(175, 79, 227)";
+ctx.fillRect(300, 200, 200, 250);
+ctx.fillStyle = "rgb(108, 49, 140)";
+ctx.fillRect(490, 200, 10, 250,);
+ctx.fillStyle = "black";
+ctx.fillRect(500, 250, 50, 200);
+
+ctx.beginPath();
+ctx.fillStyle = "black";
+ctx.fillRect(20, 250, 50, 50);
+ctx.fillStyle = "rgb(240, 182, 91)";
+ctx.fillRect(25, 255, 40, 40);
+
+ctx.beginPath();
+ctx.fillStyle = "black";
+ctx.fillRect(80, 250, 50, 50);
+ctx.fillStyle = "rgb(240, 182, 91)";
+ctx.fillRect(85, 255, 40, 40);
+
+ctx.beginPath();
+ctx.fillStyle = "black";
+ctx.fillRect(890, 190, 420, 260);
+ctx.fillStyle = "rgb(82, 255, 77)";
+ctx.fillRect(900, 200, 400, 250);
+ctx.fillStyle = "rgb(38, 128, 36)";
+ctx.fillRect(900, 440, 400, 10,);
+ctx.fillStyle = "black";
+ctx.fillRect(500, 250, 50, 200);
+
+ctx.beginPath();
+ctx.fillStyle = "black";
+ctx.fillRect(700, 250, 50, 50);
+ctx.fillStyle = "rgb(240, 182, 91)";
+ctx.fillRect(705, 255, 40, 40);
+
+printMap();
+
+function printMap() {
+  let x = 0;
+  while (x < 1310) {
+    ctx.strokeStyle = "rgb(82, 61, 41)";
+    ctx.fillStyle = "rgb(168, 126, 86)";
+    ctx.lineWidth = 2;
+    ctx.rect(x, 500, 50, 50);
+    ctx.rect(x, 550, 50, 50);
+    ctx.rect(x, 600, 50, 50);
     ctx.fill();
-    ctx.beginPath();
-    ctx.fillStyle = "#C2B280";
-    ctx.rect(0, 460, 1350, 150);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.moveTo(0, 200);
-    ctx.lineTo(1350, 200);
-    ctx.strokeStyle = "white";
     ctx.stroke();
-    ctx.beginPath();
-    const grd = ctx.createLinearGradient(20, 0, 20, 100);
-    grd.addColorStop(0, "aqua");
-    grd.addColorStop(1, "white");
-    ctx.fillStyle = grd;
-    ctx.fill();
-    ctx.fillRect(0, 0, 1350, 200);
-    ctx.beginPath();
-    ctx.fillStyle = "blue";
-    ctx.fillRect(0, 200, 1350, 260);
-    ctx.arc(575, 200, 120, 0, 1 * Math.PI, true);
-    const grd1 = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
-    grd1.addColorStop(0, "red");
-    grd1.addColorStop(1, "yellow");
-    ctx.fillStyle = grd1;
-    ctx.fill();
+    x += 50;
+  }
+}
 </script>
 
 </html>
