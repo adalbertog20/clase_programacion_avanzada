@@ -29,8 +29,13 @@ class Rectangle {
   }
 }
 
+let walls = [];
 const player = new Rectangle(50, 50, 300, 250, "black");
-const t = new Rectangle(40, 40, 350, 350, "black");
+const t = new Rectangle(50, 50, 350, 350,  "black");
+walls.push(new Rectangle(50, 50, 100, 100, "gray"));
+walls.push(new Rectangle(50, 50, 150, 100, "gray"));
+walls.push(new Rectangle(50, 50, 200, 100, "gray"));
+walls.push(new Rectangle(50, 50, 200, 300, "gray"));
 
 document.addEventListener("keydown", (e) => {
   color = random_rgba();
@@ -53,42 +58,63 @@ function update() {
   switch (dir) {
     case 1:
       player.y -= speed;
-      //y -= 10;
       if (player.y < -50) player.y = 600;
       break;
     case 2:
-      player.x -= 10;
+      player.x -= speed;
       if (player.x < -50) player.x = 600;
       break;
     case 3:
-      player.y += 10;
+      player.y += speed;
       if (player.y > 600) player.y = 0;
       break;
     case 4:
-      player.x += 10;
+      player.x += speed;
       if (player.x > 600) player.x = 0;
       break;
   }
   if (player.colision(t)) {
-    t.x = Math.random() * 500;
-    t.y = Math.random() * 500;
-    speed += 0;
+    t.x = Math.random() * 560;
+    t.y = Math.random() * 560;
+    speed += 1;
   }
+  for(const wall of walls) {
+    if (wall.colision(player)) {
+      switch (dir) {
+        case 1:
+          player.y += speed;
+          break;
+        case 2:
+          player.x += speed;
+          break;
+        case 3:
+          player.y -= speed;
+          break;
+        case 4:
+          player.x -= speed;
+          break;
+      }
+    }
+  }
+
   repaint();
   console.log(counter);
   window.requestAnimationFrame(update);
+}
 
-  function repaint() {
-    ctx.fillStyle = "lightgray";
-    ctx.fillRect(0, 0, 600, 600);
-    ctx.beginPath();
-    player.color = random_rgba();
-    player.paint(ctx);
-    t.paint(ctx);
-    ctx.stroke();
-    ctx.fill();
-    ctx.closePath();
+function repaint() {
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, 600, 600);
+  ctx.beginPath();
+  player.color = random_rgba();
+  player.paint(ctx);
+  t.paint(ctx);
+  for (const wall of walls) {
+    wall.paint(ctx);
   }
+  ctx.stroke();
+  ctx.fill();
+  ctx.closePath();
 }
 
 function random_rgba() {
