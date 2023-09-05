@@ -1,6 +1,7 @@
 const canv = document.getElementById("canv");
 const ctx = canv.getContext("2d");
 let color, dir = 0, speed = 10, counter = 0;
+let pause = false;
 
 class Rectangle {
   constructor(height, width, x, y, color) {
@@ -17,7 +18,6 @@ class Rectangle {
       this.y < t.y + t.height &&
       this.y + this.height > t.y
     ) {
-      counter++;
       return true;
     }
     return false;
@@ -39,18 +39,21 @@ walls.push(new Rectangle(50, 50, 200, 300, "gray"));
 
 document.addEventListener("keydown", (e) => {
   color = random_rgba();
-  switch (e.keyCode) {
-    case 87:
+  switch (e.code) {
+    case "KeyW":
       dir = 1;
       break;
-    case 65:
+    case "KeyA":
       dir = 2;
       break;
-    case 83:
+    case "KeyS":
       dir = 3;
       break;
-    case 68:
+    case "KeyD":
       dir = 4;
+      break;
+    case "Space":
+      dir = 5;
       break;
   }
 });
@@ -59,24 +62,32 @@ function update() {
     case 1:
       player.y -= speed;
       if (player.y < -50) player.y = 600;
+      pause = false;
       break;
     case 2:
       player.x -= speed;
+      pause = false;
       if (player.x < -50) player.x = 600;
       break;
     case 3:
       player.y += speed;
       if (player.y > 600) player.y = 0;
+      pause = false;
       break;
     case 4:
       player.x += speed;
+      pause = false;
       if (player.x > 600) player.x = 0;
+      break;
+    case 5:
+      player.x += 0;
+      pause = true;
       break;
   }
   if (player.colision(t)) {
-    t.x = Math.random() * 560;
-    t.y = Math.random() * 560;
-    speed += 1;
+    t.x = Math.random() * 500;
+    t.y = Math.random() * 500;
+    counter++;
   }
   for(const wall of walls) {
     if (wall.colision(player)) {
@@ -99,6 +110,16 @@ function update() {
 
   repaint();
   console.log(counter);
+  ctx.font = "30px Arial";
+  ctx.fillText("Puntos: " + counter, 10, 50); 
+  if(pause) {
+    ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+    ctx.fillRect(0, 0, 600, 600);
+    ctx.fillStyle = "black";
+    ctx.font = "50px Arial";
+    ctx.fillText("Pause", 200, 200); 
+    ctx.fillText("WASD to resume", 100, 250); 
+  }
   window.requestAnimationFrame(update);
 }
 
@@ -131,3 +152,4 @@ window.requestAnimationFrame = function () {
     };
 }();
 window.requestAnimationFrame(update);
+
