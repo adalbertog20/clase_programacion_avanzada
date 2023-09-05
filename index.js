@@ -2,6 +2,10 @@ const canv = document.getElementById("canv");
 const ctx = canv.getContext("2d");
 let color, dir = 0, speed = 10, counter = 0;
 let pause = false;
+let sonido = new Audio();
+sonido.src = "ElMoho.mp3";
+let icon = new Image(50, 50);
+icon.src = "ct-logo.png";
 
 class Rectangle {
   constructor(height, width, x, y, color) {
@@ -26,6 +30,9 @@ class Rectangle {
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.height, this.width);
     ctx.strokeRect(this.x, this.y, this.height, this.width);
+  }
+  paintPlayer(ctx) {
+    ctx.drawImage(icon, this.x, this.y, this.width, this.height);
   }
 }
 
@@ -63,20 +70,24 @@ function update() {
       player.y -= speed;
       if (player.y < -50) player.y = 600;
       pause = false;
+      sonido.play();
       break;
     case 2:
       player.x -= speed;
       pause = false;
+      sonido.play();
       if (player.x < -50) player.x = 600;
       break;
     case 3:
       player.y += speed;
       if (player.y > 600) player.y = 0;
+      sonido.play();
       pause = false;
       break;
     case 4:
       player.x += speed;
       pause = false;
+      sonido.play();
       if (player.x > 600) player.x = 0;
       break;
     case 5:
@@ -128,7 +139,7 @@ function repaint() {
   ctx.fillRect(0, 0, 600, 600);
   ctx.beginPath();
   player.color = random_rgba();
-  player.paint(ctx);
+  player.paintPlayer(ctx);
   t.paint(ctx);
   for (const wall of walls) {
     wall.paint(ctx);
