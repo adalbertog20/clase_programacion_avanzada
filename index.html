@@ -2,44 +2,72 @@
 <div id='app'>
     <p>Hola {{ name }}</p>
     <input v-model="name" placeholder="Tu Nombre" />
+    <hr />
     <div id="container">
         <h1>Sum Calculator</h1>
-        <input type='number' v-model='n1' placeholder="Enter Number 1"/>
+        <input type='number' v-model='n1' placeholder="Enter Number 1" />
         <span> + </span>
-        <input type='number' v-model='n2' placeholder="Enter Number 2"/>
+        <input type='number' v-model='n2' placeholder="Enter Number 2" />
     </div>
     <button @click='sumNumbers'>Sumar</button>
-    <p>El resultado  es: {{ result }}</p>
+    <p>El resultado es: {{ result }}</p>
+    <hr />
+    <fieldset>
+        <legend> Usuario: </legend>
+        <input v-model="username" input="text" name="username" placeholder="escribe tu username" />
+    </fieldset>
+    <fieldset>
+        <legend> Apellidos: </legend>
+        <input v-model="lastname" input="text" name="lastname" placeholder="escribe tu apellido" />
+    </fieldset>
+    <div>
+        <ul>
+            <li v-for="(item, index) in array" v-bind:key="index"> {{ index }} -- {{ item.username }} -- {{ item.lastname }}</li>
+        </ul>
+    </div>
+    <button @click="addPerson">Agrega Persona</button>
 </div>
 
 <script>
- const { createApp } = Vue
- createApp({
-    data() {
-         return {
-             name: "",
-             n1: 0,
-             n2: 0,
-             result: 0
-         };
-     },
-     methods: {
-         sumNumbers() {
-             this.result =   (+this.n1) + (+this.n2);
-         }
-     }
- }).mount('#app');
+    const { createApp } = Vue
+    createApp({
+        data() {
+            return {
+                name: "",
+                n1: 0,
+                n2: 0,
+                result: 0,
+                username: "",
+                lastname: "",
+                array: []
+            };
+        },
+        methods: {
+            sumNumbers() {
+                this.result = (+this.n1) + (+this.n2);
+            },
+            addPerson() {
+                const person = {
+                    username: this.username,
+                    lastname: this.lastname
+                }
+                this.array.push(person);
+            }
+        }
+    }).mount('#app');
 </script>
 
 <style type="text/css" media="screen">
- input {
-     margin-top: 10px;
-     margin-bottom: 10px;
- }
- #app {
-     border: 2px solid;
-     margin: auto;
-     width: 50%;
-     padding: 10px;
- }
+    input {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    #app {
+        border: 2px solid;
+        border-radius: 30px;
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+    }
 </style>
