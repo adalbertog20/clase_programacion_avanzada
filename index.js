@@ -1,166 +1,104 @@
 const canv = document.getElementById("canv");
 const ctx = canv.getContext("2d");
-let color, dir = 0, speed = 10, counter = 0;
-let pause = false;
-let sonido = new Audio();
-sonido.src = "ElMoho.mp3";
-let icon = new Image(50, 50);
-icon.src = "ct-logo.png";
-
-class Rectangle {
-  constructor(height, width, x, y, color) {
-    this.height = height;
-    this.width = width;
-    this.x = x;
-    this.y = y;
-    this.color = color;
-  }
-  colision(t) {
-    if (
-      this.x < t.x + t.width &&
-      this.x + this.width > t.x &&
-      this.y < t.y + t.height &&
-      this.y + this.height > t.y
-    ) {
-      return true;
-    }
-    return false;
-  }
-  paint(ctx) {
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.height, this.width);
-    ctx.strokeRect(this.x, this.y, this.height, this.width);
-  }
-  paintPlayer(ctx) {
-    ctx.drawImage(icon, this.x, this.y, this.width, this.height);
-  }
-}
-
-let walls = [];
-const player = new Rectangle(50, 50, 300, 250, "black");
-const t = new Rectangle(50, 50, 350, 350,  "black");
-walls.push(new Rectangle(50, 50, 100, 100, "gray"));
-walls.push(new Rectangle(50, 50, 150, 100, "gray"));
-walls.push(new Rectangle(50, 50, 200, 100, "gray"));
-walls.push(new Rectangle(50, 50, 200, 300, "gray"));
-
-document.addEventListener("keydown", (e) => {
-  color = random_rgba();
-  switch (e.code) {
-    case "KeyW":
-      dir = 1;
-      break;
-    case "KeyA":
-      dir = 2;
-      break;
-    case "KeyS":
-      dir = 3;
-      break;
-    case "KeyD":
-      dir = 4;
-      break;
-    case "Space":
-      dir = 5;
-      break;
-  }
-});
-function update() {
-  switch (dir) {
-    case 1:
-      player.y -= speed;
-      if (player.y < -50) player.y = 600;
-      pause = false;
-      sonido.play();
-      break;
-    case 2:
-      player.x -= speed;
-      pause = false;
-      sonido.play();
-      if (player.x < -50) player.x = 600;
-      break;
-    case 3:
-      player.y += speed;
-      if (player.y > 600) player.y = 0;
-      sonido.play();
-      pause = false;
-      break;
-    case 4:
-      player.x += speed;
-      pause = false;
-      sonido.play();
-      if (player.x > 600) player.x = 0;
-      break;
-    case 5:
-      player.x += 0;
-      pause = true;
-      break;
-  }
-  if (player.colision(t)) {
-    t.x = Math.random() * 500;
-    t.y = Math.random() * 500;
-    counter++;
-  }
-  for(const wall of walls) {
-    if (wall.colision(player)) {
-      switch (dir) {
-        case 1:
-          player.y += speed;
-          break;
-        case 2:
-          player.x += speed;
-          break;
-        case 3:
-          player.y -= speed;
-          break;
-        case 4:
-          player.x -= speed;
-          break;
-      }
-    }
-  }
-
-  repaint();
-  console.log(counter);
-  ctx.font = "30px Arial";
-  ctx.fillText("Puntos: " + counter, 10, 50); 
-  if(pause) {
-    ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-    ctx.fillRect(0, 0, 600, 600);
-    ctx.fillStyle = "black";
-    ctx.font = "50px Arial";
-    ctx.fillText("Pause", 200, 200); 
-    ctx.fillText("WASD to resume", 100, 250); 
-  }
-  window.requestAnimationFrame(update);
-}
-
-function repaint() {
-  ctx.fillStyle = "white";
-  ctx.fillRect(0, 0, 600, 600);
+let n = 0;
+while (n < canv.clientWidth) {
   ctx.beginPath();
-  player.color = random_rgba();
-  player.paintPlayer(ctx);
-  t.paint(ctx);
-  for (const wall of walls) {
-    wall.paint(ctx);
-  }
+  ctx.fillStyle = "rgb(240, 126, 34)";
+  ctx.fillRect(n, 570, 40, 40);
+  ctx.fillStyle = "rgb(84, 44, 12)";
+  ctx.fillRect(n + 40, 570, 40, 40);
+  ctx.fillStyle = "rgb(84, 44, 12)";
+  ctx.fillRect(n, 530, 40, 40);
+  ctx.fillStyle = "rgb(240, 126, 34)";
+  ctx.fillRect(n + 40, 530, 40, 40);
+  ctx.fillStyle = "rgb(240, 126, 34)";
+  ctx.fillRect(n, 490, 40, 40);
+  ctx.fillStyle = "rgb(84, 44, 12)";
+  ctx.fillRect(n + 40, 490, 40, 40);
+  ctx.fillStyle = "rgb(84, 44, 12)";
+  ctx.fillRect(n, 450, 40, 40);
+  ctx.fillStyle = "rgb(240, 126, 34)";
+  ctx.fillRect(n + 40, 450, 40, 40);
+  ctx.fillStyle = "rgb(12, 82, 6)";
+  ctx.fillRect(0, 410, 1310, 40);
+  ctx.fillStyle = "rgb(19, 135, 9)";
+  ctx.fillRect(0, 370, 1310, 40);
+  ctx.fillStyle = "rgb(31, 217, 15)";
+  ctx.fillRect(0, 330, 1310, 40);
+  ctx.fillStyle = "blue";
+  ctx.fillRect(0, 0, 1310, 330);
+  ctx.strokeStyle = "yellow";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(100, 288, 40, 0, 2 * Math.PI);
   ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(200, 288, 40, 0, 2 * Math.PI);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(300, 288, 40, 0, 2 * Math.PI);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.fillStyle = "brown";
+  ctx.fillRect(900, 100, 20, 230);
   ctx.fill();
+  // the triangle
+  ctx.beginPath();
+  ctx.moveTo(910, 100);
+  ctx.lineTo(850, 180);
+  ctx.lineTo(700, 200);
   ctx.closePath();
+  ctx.fillRect(900, 100, 20, 230);
+  ctx.fillStyle = "green";
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(910, 100);
+  ctx.lineTo(850, 140);
+  ctx.lineTo(700, 150);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(910, 100);
+  ctx.lineTo(850, 120);
+  ctx.lineTo(700, 120);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(910, 100);
+  ctx.lineTo(850, 60);
+  ctx.lineTo(700, 100);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(910, 100);
+  ctx.lineTo(900, 20);
+  ctx.lineTo(800, 40);
+  ctx.closePath();
+  ctx.fill();
+  
+  ctx.beginPath();
+  ctx.moveTo(910, 100);
+  ctx.lineTo(990, 140);
+  ctx.lineTo(850, 150);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(910, 100);
+  ctx.lineTo(970, 120);
+  ctx.lineTo(820, 120);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(910, 100);
+  ctx.lineTo(1050, 60);
+  ctx.lineTo(700, 100);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(910, 100);
+  ctx.lineTo(1000, 20);
+  ctx.lineTo(800, 40);
+  ctx.closePath();
+  ctx.fill();
+  n = n + 80;
 }
-
-function random_rgba() {
-  var o = Math.round, r = Math.random, s = 255;
-  return "rgba(" + o(r() * s) + "," + o(r() * s) + "," + o(r() * s) + "," +
-    r().toFixed(1) + ")";
-}
-window.requestAnimationFrame = function () {
-  return window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    function (callback) {
-      window.setTimeout(callback, 17);
-    };
-}();
-window.requestAnimationFrame(update);
-
