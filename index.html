@@ -1,92 +1,113 @@
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<div id='app'>
-    <!-- <p>Hola {{ name }}</p>
+<div id="app">
+  <!-- <p>Hola {{ name }}</p>
     <input v-model="name" placeholder="Tu Nombre" />
     <hr /> -->
-    <div id="container">
-        <form action="">
-            <fieldset>
-                <legend>
-                    Email:
-                </legend>
-                <input v-model="email" type="email"/>
-            </fieldset>
-            <fieldset>
-                <legend>
-                    password:
-                </legend>
-                <input v-model="password" type="password"/>
-            </fieldset>
-            <button @click="login" type="button">
-                Access
-            </button>
-        </form>
-        <!-- <h1>Sum Calculator</h1>
-        <input type='number' v-model='n1' placeholder="Enter Number 1" />
-        <span> + </span>
-        <input type='number' v-model='n2' placeholder="Enter Number 2" /> -->
-    </div>
-    <!-- <button @click='sumNumbers'>Sumar</button>
-    <p>El resultado es: {{ result }}</p>
-    <hr />
+  <form action="" v-if="!is_login">
     <fieldset>
-        <legend> Usuario: </legend>
-        <input v-model="username" input="text" name="username" placeholder="escribe tu username" />
+      <legend>Email:</legend>
+      <input v-model="email" type="email" />
     </fieldset>
     <fieldset>
-        <legend> Apellidos: </legend>
-        <input v-model="lastname" input="text" name="lastname" placeholder="escribe tu apellido" />
+      <legend>password:</legend>
+      <input v-model="password" type="password" />
     </fieldset>
-    <div>
-        <ul>
-            <li v-for="(item, index) in array" v-bind:key="index"> {{ index }} -- {{ item.username }} -- {{ item.lastname }}</li>
-        </ul>
-    </div>
-    <button @click="addPerson">Agrega Persona</button> -->
-</div>
+    <button @click="login" type="button">Access</button>
+  </form>
 
-<script>
-    const { createApp, ref } = Vue
+  <table class="customTable" v-if="is_login">
+    <thead>
+      <tr>
+        <th>Header 1</th>
+        <th>Header 2</th>
+        <th>Header 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="u in users">
+        <td>{{ u.name }} </td>
+        <td> {{ u.lastname }}</td>
+        <td> {{ u.email }} </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <script>
+    const { createApp, ref } = Vue;
     createApp({
-        data() {
-            return {
-                email: ref(''),
-                password: ref(''),
-                users: [],
-            };
-        },
-        methods: {
-            async login() {
-                const response = await fetch("info.json");
-                const users = await response.json();
-                let isLogedIn = false;
-                users.forEach(user => {
-                    if(this.email == user.email) {
-                        if(this.password == user.password) {
-                            isLogedIn = true;
-                            alert("CREDENCIALES CORRECTAS")
-                        }
-                    }
-                });
-                if(!isLogedIn) {
-                    alert("VERIFIQUE SU INFORMACION");
-                }
-            }
+      setup() {
+        users = ref([]);
+        email = ref("tilin@alu.uabcs.mx");
+        password = ref("4321");
+        is_login = ref(false);
+        let tmp = localStorage.getItem("is_login");
+        if (tmp == null) {
+          tmp = false;
         }
-    }).mount('#app');
-</script>
+        is_login = ref(tmp);
+        return { users, email, password, is_login };
+      },
+      mounted: function () {
+        const getUsers = async () => {
+          const response = await fetch("info.json");
+          const tmp_users = await response.json();
+          this.users = tmp_users;
+        }
+        getUsers();
+      },
+      methods: {
+        async login() {
+          this.is_login = false;
+          this.users.forEach((user) => {
+            if (this.email == user.email) {
+              if (this.password == user.password) {
+                this.is_login = true;
+                alert("bienvenido");
+                localStorage.setItem("is_login", "true");
+                localStorage.setItem("user_data", JSON.stringify(user));
+              }
+            }
+          });
+        },
+      },
+    }).mount("#app");
+  </script>
 
-<style type="text/css" media="screen">
+  <style type="text/css" media="screen">
     input {
-        margin-top: 10px;
-        margin-bottom: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
     }
 
     #app {
-        border: 2px solid;
-        border-radius: 30px;
-        margin: auto;
-        width: 50%;
-        padding: 10px;
+      border: 2px solid;
+      border-radius: 30px;
+      margin: auto;
+      width: 50%;
+      padding: 10px;
     }
-</style>
+
+    table.customTable {
+      width: 100%;
+      background-color: #ffffff;
+      border-collapse: collapse;
+      border-width: 2px;
+      border-color: #7ea8f8;
+      border-style: solid;
+      color: #000000;
+    }
+
+    table.customTable td,
+    table.customTable th {
+      border-width: 2px;
+      border-color: #7ea8f8;
+      border-style: solid;
+      padding: 5px;
+    }
+
+    table.customTable thead {
+      background-color: #7ea8f8;
+    }
+  </style>
+</div>
